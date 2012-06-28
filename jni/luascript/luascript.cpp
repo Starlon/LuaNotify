@@ -1,6 +1,6 @@
 // Copyright (c) 2009 by Alexander Demin
 
-#include "luascript/luascript.h"
+#include "luascript.h"
 
 #include <algorithm>
 

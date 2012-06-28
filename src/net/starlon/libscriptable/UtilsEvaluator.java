@@ -1,4 +1,4 @@
-package com.starlon.libscriptable;
+package net.starlon.libscriptable;
 
 public class UtilsEvaluator {
     private CPtr Evaluator;

@@ -1,7 +1,7 @@
 /* $Id$
  * $URL$
  *
- * Copyright (C) 2003 Michael Reinelt <michael@reinelt.co.at>
+ * Copyright (C) 1999, 2000 Michael Reinelt <michael@reinelt.co.at>
  * Copyright (C) 2004 The LCD4Linux Team <lcd4linux-devel@users.sourceforge.net>
  * Copyright (C) 2009 Scott Sibley <scott@starlon.net>
  *
@@ -21,20 +21,26 @@
  * along with LCDControl.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __PLUGIN_FPS_H__
-#define __PLUGIN_FPS_H__
 
-#include "luascript.h"
+#ifndef _DEBUG_H_
+#define _DEBUG_H_
 
+extern int running_foreground;
+extern int running_background;
+extern int verbose_level;
 
-namespace LCD {
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-class PluginFPS {
-    public:
-    PluginFPS(lua *script);
-    ~PluginFPS();
-};
+void message(const int level, const char *format, ...) __attribute__ ((format(__printf__, 2, 3)));
 
-}; // End namespace
+#ifdef __cplusplus
+}
+#endif
+
+#define LCDDebug(args...) message (2, __FILE__ ": " args)
+#define LCDInfo(args...)  message (1, args)
+#define LCDError(args...) message (0, args)
 
 #endif

@@ -24,11 +24,9 @@
 #include <iostream>
 #include <string>
 #include <jni.h>
-#include <libvisual/libvisual.h>
 
-#include "luascript.h"
+#include "../luascript/luascript.h"
 #include "Evaluator.h"
-#include "SpecialChar.h"
 #include "CPtr.h"
 #include "debug.h"
 
@@ -41,7 +39,6 @@ Evaluator::Evaluator()
     mLoadavg = new PluginLoadavg(mScript);
     mProcStat = new PluginProcStat(mScript);
     mUptime = new PluginUptime(mScript);
-    mFPS = new PluginFPS(mScript);
     mUname = new PluginUname(mScript);
     mNetinfo = new PluginNetinfo(mScript);
     mNetDev = new PluginNetDev(mScript);
@@ -55,7 +52,6 @@ Evaluator::~Evaluator()
     delete mLoadavg;
     delete mProcStat;
     delete mUptime;
-    delete mFPS;
     delete mUname;
     delete mNetinfo;
     delete mNetDev;
@@ -71,7 +67,7 @@ std::string Evaluator::Eval(std::string str, std::string name)
         val = mScript->get_variable<lua::string_arg_t>("__out__").value();
     } catch (lua::exception &e)
     {
-        visual_log(VISUAL_LOG_ERROR, "(%s) Lua error: %s, line: %d (%s)", name.c_str(), e.error().c_str(), e.line(), str.c_str());
+        printf("(%s) Lua error: %s, line: %d (%s)", name.c_str(), e.error().c_str(), e.line(), str.c_str());
     }
     return val;
 

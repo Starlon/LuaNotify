@@ -28,7 +28,6 @@
 #include "PluginLoadavg.h"
 #include "PluginProcStat.h"
 #include "PluginUptime.h"
-#include "PluginFPS.h"
 #include "PluginUname.h"
 #include "PluginNetinfo.h"
 #include "PluginNetDev.h"
@@ -44,7 +43,6 @@ class Evaluator {
     PluginLoadavg *mLoadavg;
     PluginProcStat *mProcStat;
     PluginUptime  *mUptime;
-    PluginFPS *mFPS;
     PluginUname *mUname;
     PluginNetinfo *mNetinfo;
     PluginNetDev *mNetDev;

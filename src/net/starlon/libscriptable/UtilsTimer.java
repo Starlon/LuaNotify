@@ -1,4 +1,4 @@
-package com.starlon.libscriptable;
+package net.starlon.libscriptable;
 
 import java.util.Timer;
 import java.util.TimerTask;
