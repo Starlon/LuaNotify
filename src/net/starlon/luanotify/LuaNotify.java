@@ -5,55 +5,69 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.content.Context;
-import android.content.ContentUris;
+//import android.content.ContentUris;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.pm.ConfigurationInfo;
+//import android.content.BroadcastReceiver;
+//import android.content.ContentResolver;
+//import android.content.pm.ConfigurationInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+/*
 import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 import android.view.View.OnClickListener;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.ViewConfiguration;
+*/
+
+/*
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+*/
 import android.widget.Toast;
+/*
 import android.media.MediaRecorder;
 import android.media.AudioRecord;
 import android.media.AudioFormat;
+*/
 import android.util.Log;
+/*
 import android.net.Uri;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+*/
+
+/*
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+*/
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.FileDescriptor;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
+/*
 import java.lang.Process;
 import java.lang.CharSequence;
+*/
 
 import net.starlon.libscriptable.UtilsEvaluator;
 
-public class LuaNotify extends Activity implements OnClickListener, OnSharedPreferenceChangeListener
+public class LuaNotify extends Activity
 {
     private final static String TAG = "LuaNotify/LuaNotifyActivity";
     private final static String PREFS = "LuaNotifyPrefs";
