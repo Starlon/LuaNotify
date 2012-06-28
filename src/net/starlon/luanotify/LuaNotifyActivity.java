@@ -2,6 +2,8 @@ package net.starlon.luanotify;
 
 import android.app.ActivityManager;
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.Notification;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.content.Context;
@@ -67,12 +69,14 @@ import java.lang.CharSequence;
 
 import net.starlon.libscriptable.UtilsEvaluator;
 
-public class LuaNotify extends Activity
+public class LuaNotifyActivity extends Activity
 {
     private final static String TAG = "LuaNotify/LuaNotifyActivity";
     private final static String PREFS = "LuaNotifyPrefs";
 
     private UtilsEvaluator mEvaluator;
+
+    private NotificationManager mNotificationManager;
 
     public final Object mSynch = new Object();
 
@@ -81,69 +85,18 @@ public class LuaNotify extends Activity
         return mEvaluator;
     }
 
-    private void makeFile(String file, int id)
-    {
-        InputStream inputStream = getResources().openRawResource(id);
-     
-        FileOutputStream outputStream = null;
-        try {
-            outputStream = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
-        
-     
-        int i;
-        try {
-            i = inputStream.read();
-            while (i != -1)
-            {
-                outputStream.write(i);
-                i = inputStream.read();
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     /** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle state)
     {
         super.onCreate(state);
-        //makeFile("/data/data/com.starlon.starvisuals/libstub.lua", R.raw.libstub);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
 
         mEvaluator = new UtilsEvaluator();
-
-/*
-        String val = mEvaluator.eval("return LCD.uptime('%d d %H:%M:%S')");
-        Log.w(TAG, "HAH " + val);
-*/
-
-        //mPrefs = getSharedPreferences(PREFS, 0);
-        //mPrefs.registerOnSharedPreferenceChangeListener(this);
-
-        //mEditor = mPrefs.edit();
-
-    }
-
-    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) 
-    {
-
-        if(key.equals("prefs_actor_selection"))
-        {
-            //mActor = mPrefs.getString(key, ACTOR);
-            //NativeHelper.actorSetCurrentByName(mActor, true);
-
-        }
     }
 
     public void onClick(View v)
