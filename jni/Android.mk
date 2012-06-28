@@ -1,8 +1,25 @@
-LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
+WARNING_CFLAGS 		:= -Wall -Wstrict-aliasing -Wcast-align -Waddress -Wmissing-braces -Wimplicit -Wunused -Wno-unused-variable
 
-LOCAL_MODULE    := hello-jni
-LOCAL_SRC_FILES := hello-jni.c
+LV_C_INCLUDES  		:= 
+LV_CFLAGS      		:= $(WARNING_CFLAGS)
+LV_CXXFLAGS    		:=
+LV_CPPFLAGS    		:= -std=gnu++0x -fexceptions
+LV_SHARED_LIBRARIES	:= 
+LV_STATIC_LIBRARIES	:=
+LV_LDFLAGS              :=
+LV_LDLIBS               :=
 
-include $(BUILD_SHARED_LIBRARY)
+
+ifeq ($(TARGET_ARCH_ABI),armeabi)
+endif
+        
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LV_CFLAGS += -DHAVE_NEON=1 -mfloat-abi=softfp -mfpu=neon -ftree-vectorize -ftree-vectorizer-verbose=5
+endif
+            
+ifeq ($(TARGET_ARCH_ABI),x86)
+endif
+                
+                
+include $(call all-subdir-makefiles)
