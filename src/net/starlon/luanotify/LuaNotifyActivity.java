@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Notification;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.os.Looper;
 import android.content.Context;
 //import android.content.ContentUris;
 import android.content.res.Configuration;
@@ -48,9 +49,9 @@ import android.provider.MediaStore;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 */
 
-/*
 import java.util.Timer;
 import java.util.TimerTask;
+/*
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,11 +75,13 @@ public class LuaNotifyActivity extends Activity
     private final static String TAG = "LuaNotify/LuaNotifyActivity";
     private final static String PREFS = "LuaNotifyPrefs";
 
-    private UtilsEvaluator mEvaluator;
+    public UtilsEvaluator mEvaluator;
 
     private NotificationManager mNotificationManager;
 
     public final Object mSynch = new Object();
+
+    private LuaNotifyView mView;
 
     public UtilsEvaluator getEvaluator()
     {
@@ -93,10 +96,17 @@ public class LuaNotifyActivity extends Activity
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        mEvaluator = new UtilsEvaluator();
+
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
 
-        mEvaluator = new UtilsEvaluator();
+        mView = new LuaNotifyView(this);
+        setContentView(mView);
+
+        Intent service = new Intent(this, LuaNotifyService.class);
+        this.startService(service);
+
     }
 
     public void onClick(View v)

@@ -82,7 +82,7 @@ std::string Evaluator::Eval(std::string str)
 
 extern "C" {
 
-JNIEXPORT jstring JNICALL Java_com_starlon_libscriptable_UtilsEvaluator_evaluate(
+JNIEXPORT jstring JNICALL Java_net_starlon_libscriptable_UtilsEvaluator_evaluate(
     JNIEnv *env, jclass clazz, jobject obj, jstring str)
 {
     Evaluator *eval = getObjectFromCPtr<Evaluator *>( env, obj );
@@ -96,7 +96,7 @@ JNIEXPORT jstring JNICALL Java_com_starlon_libscriptable_UtilsEvaluator_evaluate
     return env->NewStringUTF(val.c_str());
 }
 
-JNIEXPORT jobject JNICALL Java_com_starlon_libscriptable_UtilsEvaluator_evaluatorNew(
+JNIEXPORT jobject JNICALL Java_net_starlon_libscriptable_UtilsEvaluator_evaluatorNew(
     JNIEnv *env, jclass clazz)
 {
     Evaluator *eval = new Evaluator();
@@ -118,7 +118,7 @@ JNIEXPORT jobject JNICALL Java_com_starlon_libscriptable_UtilsEvaluator_evaluato
     return obj;
 }
 
-JNIEXPORT void JNICALL Java_com_starlon_libscriptable_UtilsEvaluator_evaluatorDel(
+JNIEXPORT void JNICALL Java_net_starlon_libscriptable_UtilsEvaluator_evaluatorDel(
     JNIEnv *env, jclass clazz, jobject obj)
 {
     Evaluator *eval = getObjectFromCPtr<Evaluator *>(env, obj);

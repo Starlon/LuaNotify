@@ -10,9 +10,12 @@ import android.os.IBinder;
 import android.os.Binder;
 import java.lang.CharSequence;
 
+import net.starlon.libscriptable.UtilsEvaluator;
+
 public class LuaNotifyService extends Service {
     private NotificationManager mNM;
     private int NOTIFICATION = 0xdead;
+    private UtilsEvaluator mEvaluator;
 
     public class LocalBinder extends Binder {
         LuaNotifyService getService() {
@@ -25,7 +28,13 @@ public class LuaNotifyService extends Service {
         super.onCreate();
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-        showNotification();
+        System.loadLibrary("gnustl_shared");
+        System.loadLibrary("luascript");
+        System.loadLibrary("scriptable");
+
+        mEvaluator = new UtilsEvaluator();
+
+        showNotification(mEvaluator.eval("return uname.Uname('sysname')"));
     }
 
     @Override
@@ -46,11 +55,11 @@ public class LuaNotifyService extends Service {
 
     private final IBinder mBinder = new LocalBinder();
 
-    private void showNotification()
+    private void showNotification(String arg)
     {
     
         // In this sample, we'll use the same text for the ticker and the expanded notification
-        CharSequence text = getText(R.string.app_name);
+        CharSequence text = arg;
 
         // Set the icon, scrolling text and timestamp
         Notification notification = new Notification(android.R.drawable.btn_star_big_on, text,
