@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="prefs_script">return uname.Uname(\'sysname\') .. \' \' .. uname.Uname(\'nodename\') .. \' \' .. uname.Uname(\'release\') .. \' \' .. cpuinfo.Cpuinfo(\'model name\')</string>
+
+</resources>

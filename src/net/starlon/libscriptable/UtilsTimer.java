@@ -6,14 +6,14 @@ import java.util.Date;
 
 public class UtilsTimer {
     private Timer mTimer;
-    public String mName;
+    private String mName;
     private int mDuration;
     private boolean mRepeating;
     private TimerTask mTask;
 
-    UtilsTimer(String name, int duration, boolean repeating, TimerTask task)
+    public UtilsTimer(String name, int duration, boolean repeating, TimerTask task)
     {
-        mTimer = new Timer(name);
+        mTimer = new Timer();
         mName = name;
         mDuration = duration;
         mRepeating = repeating;
